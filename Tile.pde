@@ -28,8 +28,8 @@ class Tile { //the 'tile' class is the basic building block of the world. Tiles 
   }
   
   public void render(float drawX, float drawY, float drawW, float drawH){ //Will draw the tile in the world
-    strokeWeight(3);
-    fill(100);
+    strokeWeight(1);
+    fill(100,90);
     image(texture, drawX, drawY, drawW, drawH);
     ellipse(drawX, drawY, drawW, drawH);
   }
