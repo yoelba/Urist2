@@ -4,6 +4,8 @@
 
 //LIBGDX
 
+//I really hate having logic and gui design in the same file. Remedy this later!
+
 
 int globalTileCountX = 12;
 int globalTileCountY = 9;
@@ -18,14 +20,16 @@ Map myMap;
 void setup(){
   myMap = new Map(globalTileCountX,globalTileCountY,globalScreenWidth,globalScreenHeight);
   Dwarf urist = new Dwarf(5,5, "urist");
-  Dwarf urist2 = new Dwarf(7,7, "urist2");
+  Dwarf urist2 = new Dwarf(7,7, "Gimli");
   myMap.entities.add(urist);
+  urist.setSelected(true); //INSTANtIATION IS UGLY! FIX LATER!
   myMap.entities.add(urist2);
   size(800, 450);
 }
 
 void draw(){
- myMap.render(); 
+  background(0);
+ myMap.update(); 
 }
 
 void mouseClicked(){

@@ -40,7 +40,7 @@ class Map {
     }
   }
 
-  public void render() {
+  public void update() {
     for (int i = 0; i< tilesX; i++) { //Draw them tiles now
       for (int j = 0; j< tilesY; j++) {
         ellipseMode(CORNER);
@@ -48,27 +48,34 @@ class Map {
       }
     }
     
-    entities.get(selectedEntity).update(tiles); //update current entity
-
-    for (int i = 0; i < 16; i++) { //OPTIMISE THIS LOOP FOR GOD'S SAKE
-      for (int j = 0; j < 16; j++) {
+    for (int i = 0; i < 12; i++) { //OPTIMISE THIS LOOP FOR GOD'S SAKE -> Perhaps each entity, upon moving, can rectify it's occupied tile position?
+      for (int j = 0; j < 9; j++) {
         tiles[i][j].occupied=false;
+        tiles[i][j].factionControl = 'N';
       }
     }
 
-    for (int i = 0; i < entities.size(); i++) { //Render all entities
-      tiles[entities.get(i).getXPosition()][entities.get(i).getYPosition()].occupied = true;
+    for (int i = 0; i < entities.size(); i++) { //Render all entities!
+      tiles[entities.get(i).getXPos()][entities.get(i).getYPos()].occupied = true;
+      tiles[entities.get(i).getXPos()][entities.get(i).getYPos()].factionControl = (char)entities.get(i).faction;
       entities.get(i).render();
     }
-    if (gotInput == true) {
-      if (selectedEntity == entities.size()-1) {
+    
+    if (entities.get(selectedEntity).update(tiles)) {
+     // delay(250); //A short wait prevents accidental 'doube tapping' which may cause unwanted movement.
+      if (selectedEntity == entities.size()-1 && entities.get(selectedEntity).getTurnPoints() == 0) {
+        entities.get(selectedEntity).setSelected(false);
         selectedEntity = 0;
-      } else {
+        entities.get(selectedEntity).selectionReset();
+        //println("Going back to the start of entity list");
+      } else if( entities.get(selectedEntity).getTurnPoints() == 0 ){
+        entities.get(selectedEntity).setSelected(false);
         selectedEntity++;
+        entities.get(selectedEntity).selectionReset();
+        //println("Selecting next entity");
       }
     }
-    /*println("selected: "+selectedEntity);
-     println("Length of 'entities' "+entities.size());*/
+    
     gotInput = false;
   }
 }
