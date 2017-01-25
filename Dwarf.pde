@@ -57,7 +57,7 @@ class Dwarf extends Entity { //The heroic dwarves are controlled by the player. 
         }
         ellipse(50*globalTileCountX+20+(40*i), 350, 20, 20);
       }
-
+    delay(100);
     }
     fill(255, 0, 0);
     ellipse(50*super.Xpos, 50*super.Ypos, 50, 50);

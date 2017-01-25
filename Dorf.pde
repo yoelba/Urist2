@@ -20,10 +20,12 @@ Map myMap;
 void setup(){
   myMap = new Map(globalTileCountX,globalTileCountY,globalScreenWidth,globalScreenHeight);
   Dwarf urist = new Dwarf(5,5, "urist");
-  Dwarf urist2 = new Dwarf(7,7, "Gimli");
+  //Dwarf urist2 = new Dwarf(7,7, "Gimli");
+  MadDwarf badBoy = new MadDwarf(2,2);
   myMap.entities.add(urist);
   urist.setSelected(true); //INSTANtIATION IS UGLY! FIX LATER!
-  myMap.entities.add(urist2);
+  //myMap.entities.add(urist2);
+  myMap.entities.add(badBoy);
   size(800, 450);
 }
 
