@@ -6,8 +6,10 @@ abstract class Entity {
   protected int faction;
   /*
   0 = Dwarf Survivors; Player controlled entities
-  1 = The Lost and the Damned; An enemy faction
+  1 = The Lost and the Damned; An enemy faction of madmen, mutants, and weird abberations
   */
+  
+  public ArrayList<Clickable> clickables = new ArrayList<Clickable>();
   protected boolean isSelected = false;
   protected PImage portrait;
   protected int HP; //Hit points. When these equal zero the entity is slain!
@@ -15,6 +17,14 @@ abstract class Entity {
   protected int Ypos;
   protected int turnPointsMax; //Each character will have a certain number of turnPoints, which can be expended on movement and activating abilities.
   protected int turnPoints;
+  
+  public Entity(int HP, int Xpos, int Ypos, int turnPointsMax){
+    this.HP = HP; //Hit points. When these equal zero the entity is slain!
+    this.Xpos = Xpos;
+    this.Ypos = Ypos;
+    this.turnPointsMax = turnPointsMax;
+    this.turnPoints = turnPointsMax;
+  }
   
   public void setSelected(boolean bool){
     this.isSelected = bool;

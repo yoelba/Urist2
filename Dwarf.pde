@@ -2,14 +2,14 @@ class Dwarf extends Entity { //The heroic dwarves are controlled by the player. 
   private String name;
 
   public Dwarf(int Xpos, int Ypos, String name) {
+    super(3, Xpos, Ypos, 3);
     this.faction = 0;
     this.portrait = loadImage("dorfMugshot.png");
-    super.Xpos = Xpos;
-    super.Ypos = Ypos;
-    super.turnPointsMax = 3;
-    super.turnPoints = 3;
     this.name = name;
+    AbilityBtn btn = new AbilityBtn(50*globalTileCountX, 400, true);
+    super.clickables.add(btn);
   }
+
 
   public boolean update(Tile[][] tiles) { //This retuns true if the entity did move.
     if (gotInput == true) {
@@ -40,6 +40,7 @@ class Dwarf extends Entity { //The heroic dwarves are controlled by the player. 
   
   public void render() {
     if(super.isSelected == true){
+      
       image(portrait, 50*globalTileCountX, 0, 200, 250);
       fill(232,174,92);
       noStroke();
@@ -57,7 +58,8 @@ class Dwarf extends Entity { //The heroic dwarves are controlled by the player. 
         }
         ellipse(50*globalTileCountX+20+(40*i), 350, 20, 20);
       }
-    delay(100);
+      
+      for(Clickable C: this.clickables) C.render();
     }
     fill(255, 0, 0);
     ellipse(50*super.Xpos, 50*super.Ypos, 50, 50);

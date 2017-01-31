@@ -11,6 +11,7 @@ class Map {
   private float tileWidth;
   private float tileHeight; //pixel dimensions of individual tiles
   public Tile[][] tiles = new Tile[globalTileCountX][globalTileCountY];
+  //public ArrayList<Clickable> clickables = new ArrayList<Clickable>();
   public ArrayList<Entity> entities = new ArrayList<Entity>();
 
   public int getTilesX() {
@@ -61,6 +62,11 @@ class Map {
       entities.get(i).render();
     }
     
+    if(freeze == true){
+      delay(100);
+      freeze = false;
+    }
+    
     if (entities.get(selectedEntity).update(tiles)) {
      // delay(250); //A short wait prevents accidental 'doube tapping' which may cause unwanted movement.
       if (selectedEntity == entities.size()-1 && entities.get(selectedEntity).getTurnPoints() == 0) {
@@ -74,6 +80,7 @@ class Map {
         entities.get(selectedEntity).selectionReset();
         //println("Selecting next entity");
       }
+      freeze = true;
     }
     
     gotInput = false;
